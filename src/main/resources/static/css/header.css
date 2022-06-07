@@ -1,0 +1,68 @@
+header {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 50px;
+  display: block;
+  position: relative;
+}
+
+.logoImg img {
+  margin-bottom: 35px;
+  margin-top: 25px;
+  margin-left: 50px;
+  width: 20%;
+}
+
+/* unvisited link */
+.navLink {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  text-align: center;
+}
+.navLink a {
+  text-decoration: none;
+  margin-right: 25px;
+  margin-left: 50px;
+  text-align: center;
+  position: relative;
+}
+
+.navLink a:link {
+  color: rgb(0, 0, 0);
+}
+
+/* visited link */
+.navLink a:visited {
+  color: rgb(0, 0, 0);
+}
+
+/* mouse over link */
+.navLink a:hover {
+  color: rgb(54, 54, 54);
+  font-weight: bold;
+}
+
+/* selected link */
+.navLink a:active {
+  color: blue;
+}
+
+.userIcon {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  font-size: 22px;
+  padding-right: 50px;
+}
+
+.userIcon i {
+  padding-left: 20px;
+}
+
+.userIcon a {
+  color: rgb(0, 0, 0);
+}
