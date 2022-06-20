@@ -20,7 +20,7 @@ public class UserEntity {
     private Long id;
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private Account account;
+    private AccountEntity accountEntity;
     private String firstName;
     private String lasName;
     private int age;

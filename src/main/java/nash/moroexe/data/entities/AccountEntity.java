@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Account {
+public class AccountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
