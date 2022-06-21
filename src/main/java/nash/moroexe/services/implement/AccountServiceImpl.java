@@ -52,5 +52,10 @@ public class AccountServiceImpl implements AccountService {
         repository.deleteById(id);
     }
 
+    @Override
+    public String ping() {
+        return "Account Service is Up";
+    }
+
 
 }

@@ -11,4 +11,5 @@ public interface AccountService {
     public AccountEntity findAccount(Long id);
     public AccountEntity editAccount(AccountEntity account, Long id);
     public void deleteAccount(long id);
+    public String ping();
 }

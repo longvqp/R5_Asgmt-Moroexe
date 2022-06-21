@@ -20,4 +20,6 @@ public class AccountEntity {
     private String avatar;
     private boolean admin;
 
+    @OneToOne(mappedBy = "account")
+    private UserEntity user;
 }

@@ -18,9 +18,6 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private AccountEntity accountEntity;
     private String firstName;
     private String lasName;
     private int age;
@@ -29,4 +26,7 @@ public class UserEntity {
     private String phone;
     private Date dob;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private AccountEntity account;
 }

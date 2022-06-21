@@ -16,7 +16,7 @@ public class AccountController {
 
     @GetMapping("/test")
     String pingServer(){
-        return "Server is running";
+        return this.accountService.ping();
     }
     @GetMapping("/account")
     List<AccountEntity> getAllAccount(){
