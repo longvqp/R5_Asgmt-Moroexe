@@ -4,12 +4,14 @@ import nash.moroexe.data.entities.AccountEntity;
 import nash.moroexe.data.repositories.AccountRepository;
 import nash.moroexe.exceptions.AccountNotFoundException;
 import nash.moroexe.services.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository repository;
-
+    @Autowired
     public AccountServiceImpl(AccountRepository repository) {
         this.repository = repository;
     }
