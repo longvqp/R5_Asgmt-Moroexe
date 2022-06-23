@@ -18,8 +18,8 @@ public class AccountEntity {
     private String email;
     private String password;
     private Date createdDate;
-    private Boolean isActive;
-    private Boolean isAdmin;
+    private Boolean isActive = true;
+    private Boolean isAdmin = false;
 
     @OneToOne
     @JoinColumn(name = "user_ref",referencedColumnName = "userId")
