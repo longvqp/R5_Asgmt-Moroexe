@@ -1,36 +1,33 @@
 package nash.moroexe.data.entities;
 
-
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
-
+@Entity
 @Getter
 @Setter
-@Entity
-@NoArgsConstructor
-@Table(name = "users")
 public class UserEntity {
-    public enum Gender {
-        MALE,
-        FEMALE
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private String address;
-    private Gender gender;
-    private String phone;
-    private Date dob;
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
+    private Long userId;
 
-    @OneToOne()
+    private String fullname;
+    private String phone;
+    private Date birthday;
+    private String address;
+    private String gender;
+
+    @OneToOne(mappedBy = "user")
     private AccountEntity account;
 }
