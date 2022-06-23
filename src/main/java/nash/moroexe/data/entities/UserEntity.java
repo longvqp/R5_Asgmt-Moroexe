@@ -10,16 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class UserEntity {
-    @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Long userId;
 
     private String fullname;
