@@ -15,18 +15,22 @@ import java.sql.Date;
 @NoArgsConstructor
 @Table(name = "users")
 public class UserEntity {
+    public enum Gender {
+        MALE,
+        FEMALE
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
-    private String lasName;
+    private String lastName;
     private int age;
     private String address;
-    private String gender;
+    private Gender gender;
     private String phone;
     private Date dob;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @OneToOne()
     private AccountEntity account;
 }

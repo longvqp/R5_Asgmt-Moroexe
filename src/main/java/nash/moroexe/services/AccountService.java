@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface AccountService {
 
-    public List<AccountEntity> getAllAccount();
-    public AccountEntity addAccount(AccountEntity account);
-    public AccountEntity findAccount(Long id);
-    public AccountEntity editAccount(AccountEntity account, Long id);
-    public void deleteAccount(long id);
-    public String ping();
+     List<AccountEntity> getAllAccount();
+     AccountEntity addAccount(AccountEntity account);
+     AccountEntity findAccount(Long id);
+     AccountEntity editAccount(AccountEntity account, Long id);
+     void deleteAccount(long id);
+     String ping();
 }

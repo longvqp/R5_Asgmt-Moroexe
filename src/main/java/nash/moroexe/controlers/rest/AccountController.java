@@ -3,16 +3,14 @@ package nash.moroexe.controlers.rest;
 //Testing all Querrry from repo and controller
 import nash.moroexe.data.entities.AccountEntity;
 import nash.moroexe.services.implement.AccountServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
 public class AccountController {
+    @Autowired
     private AccountServiceImpl accountService;
-
-    public AccountController(AccountServiceImpl accountService) {
-        this.accountService = accountService;
-    }
 
     @GetMapping("/test")
     String pingServer(){
