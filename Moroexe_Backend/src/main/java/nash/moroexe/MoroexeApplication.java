@@ -11,6 +11,7 @@ public class MoroexeApplication {
     public static void main(String[] args) {
         SpringApplication.run(MoroexeApplication.class, args);
     }
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

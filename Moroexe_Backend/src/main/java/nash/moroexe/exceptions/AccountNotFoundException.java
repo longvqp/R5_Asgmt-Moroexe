@@ -1,8 +1,8 @@
 package nash.moroexe.exceptions;
 
-public class AccountNotFoundException extends RuntimeException{
-    public AccountNotFoundException(Long id){
+public class AccountNotFoundException extends RuntimeException {
+    public AccountNotFoundException() {
         super
-                ("Did not exist Account with ID: " + id);
+                ("Did not exist Account");
     }
 }

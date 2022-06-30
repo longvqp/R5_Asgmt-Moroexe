@@ -11,7 +11,8 @@ import java.util.List;
 @Getter
 @Setter
 public class CatagoryEntity {
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long categoryId;
     private String name;
     private Date createdDate;

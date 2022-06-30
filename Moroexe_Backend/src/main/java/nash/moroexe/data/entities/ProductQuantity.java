@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class ProductQuantity {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "productId")
@@ -18,7 +19,7 @@ public class ProductQuantity {
     private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="productQuantityId")
+    @JoinColumn(name = "productQuantityId")
     private CartEntity cart_ref;
 
 }

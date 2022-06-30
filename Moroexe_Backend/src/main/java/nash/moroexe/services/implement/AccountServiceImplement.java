@@ -9,6 +9,7 @@ import nash.moroexe.services.AccountServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,41 +24,51 @@ public class AccountServiceImplement implements AccountServices {
         this.modelMapper = modelMapper;
     }
 
+
     @Override
-    public List<AccountEntity> getAllAccount() {
-        return this.accountRepository.findAll();
+    public List<AccountResponseDTO> getAllAccount() {
+        List<AccountEntity> accounts = this.accountRepository.findAll();
+        if (accounts.isEmpty()) {
+            throw new AccountNotFoundException();
+        } else {
+            List<AccountResponseDTO> accountsDTO = new ArrayList<>();
+            for (AccountEntity account : accounts) {
+                AccountResponseDTO accountDTO = modelMapper.map(account, AccountResponseDTO.class);
+                accountsDTO.add(accountDTO);
+            }
+            return accountsDTO;
+        }
     }
 
     @Override
-    public AccountResponseDTO findAccountByIdDTO(Long id) {
+    public AccountResponseDTO findAccountById(Long id) {
         Optional<AccountEntity> accountOptional = this.accountRepository.findById(id);
-        if(accountOptional.isPresent()){
+        if (accountOptional.isPresent()) {
             AccountEntity accountEntity = accountOptional.get();
             AccountResponseDTO dto = new AccountResponseDTO();
-            return modelMapper.map(accountOptional.get(),AccountResponseDTO.class);
+            return modelMapper.map(accountOptional.get(), AccountResponseDTO.class);
         }
-        throw new AccountNotFoundException(id);
-    }
-
-    @Override
-    public AccountEntity findAccountById(Long id) {
-        Optional<AccountEntity> optionalAccount = this.accountRepository.findById(id);
-        if (optionalAccount.isPresent()) {
-            return optionalAccount.get();
-        }
-        throw new AccountNotFoundException(id);
+        throw new AccountNotFoundException();
     }
 
     @Override
     public AccountResponseDTO createAccount(AccountRequestDTO accountDTO) {
-        AccountEntity account = modelMapper.map(accountDTO,AccountEntity.class);
+        AccountEntity account = modelMapper.map(accountDTO, AccountEntity.class);
         AccountEntity savedAccount = accountRepository.save(account);
-        return modelMapper.map(savedAccount,AccountResponseDTO.class);
+        return modelMapper.map(savedAccount, AccountResponseDTO.class);
     }
 
     @Override
-    public AccountResponseDTO updateAccount(AccountRequestDTO accountDTO, Long id) {
-        return null;
+    public AccountRequestDTO updateAccount(AccountRequestDTO accountDTO, Long id) {
+        Optional<AccountEntity> accountOptional = this.accountRepository.findById(id);
+        if(!accountOptional.isPresent()){
+            throw new AccountNotFoundException();
+        }else{
+            AccountEntity account = accountOptional.get();
+            modelMapper.map(accountDTO,account);
+            this.accountRepository.save(account);
+            return accountDTO;
+        }
     }
 
     @Override

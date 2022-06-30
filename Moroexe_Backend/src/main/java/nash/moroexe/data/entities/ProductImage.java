@@ -9,12 +9,13 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class ProductImage {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String url;
     private String alt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="productImage")
+    @JoinColumn(name = "productImage")
     private ProductEntity product_ref;
 }

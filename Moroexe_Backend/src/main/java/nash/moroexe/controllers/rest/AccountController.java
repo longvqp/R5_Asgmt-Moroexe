@@ -11,32 +11,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api/account")
 public class AccountController {
     private AccountServices accountServices;
+
     @Autowired
     public AccountController(AccountServices accountServices) {
         this.accountServices = accountServices;
     }
+
     @GetMapping("/ping")
-    String pingServices(){
+    String pingServices() {
         return "Account Services is UP";
     }
+
     @GetMapping
-    List<AccountEntity> getAllAccount(){
-       return this.accountServices.getAllAccount();
+    List<AccountResponseDTO> getAllAccount() {
+        return this.accountServices.getAllAccount();
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    AccountResponseDTO createAccount (@RequestBody AccountRequestDTO accountDTO){
+    AccountResponseDTO createAccount(@RequestBody AccountRequestDTO accountDTO) {
         return this.accountServices.createAccount(accountDTO);
     }
 
     @GetMapping("/login")
-    String loginHandler(@RequestParam String username,@RequestParam String password){
+    String loginHandler(@RequestParam String username, @RequestParam String password) {
 
-        return "user: "+ username + "||" + "pass: "+ password;
+        return "user: " + username + "||" + "pass: " + password;
     }
 
 }
