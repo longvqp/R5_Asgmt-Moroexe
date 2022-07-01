@@ -37,8 +37,19 @@ public class AccountController {
 
     @GetMapping("/login")
     String loginHandler(@RequestParam String username, @RequestParam String password) {
-
         return "user: " + username + "||" + "pass: " + password;
+
     }
+
+    @GetMapping("/logout")
+    void logOutHandler(){
+
+    }
+
+    //Update Account
+
+    //Change Password
+
+    //Sign Up
 
 }

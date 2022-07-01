@@ -5,6 +5,7 @@ import nash.moroexe.data.repositories.AccountRepository;
 import nash.moroexe.dto.request.AccountRequestDTO;
 import nash.moroexe.dto.response.AccountResponseDTO;
 import nash.moroexe.exceptions.AccountNotFoundException;
+import nash.moroexe.exceptions.ResourceNotFoundException;
 import nash.moroexe.services.AccountServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class AccountServiceImplement implements AccountServices {
     public List<AccountResponseDTO> getAllAccount() {
         List<AccountEntity> accounts = this.accountRepository.findAll();
         if (accounts.isEmpty()) {
-            throw new AccountNotFoundException();
+            throw new ResourceNotFoundException("Can't find any account");
         } else {
             List<AccountResponseDTO> accountsDTO = new ArrayList<>();
             for (AccountEntity account : accounts) {
@@ -48,7 +49,7 @@ public class AccountServiceImplement implements AccountServices {
             AccountResponseDTO dto = new AccountResponseDTO();
             return modelMapper.map(accountOptional.get(), AccountResponseDTO.class);
         }
-        throw new AccountNotFoundException();
+        throw new ResourceNotFoundException("Can not found any account with ID= "+id);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class AccountServiceImplement implements AccountServices {
     public AccountRequestDTO updateAccount(AccountRequestDTO accountDTO, Long id) {
         Optional<AccountEntity> accountOptional = this.accountRepository.findById(id);
         if(!accountOptional.isPresent()){
-            throw new AccountNotFoundException();
+            throw new ResourceNotFoundException("Can not found any account with ID= "+id);
         }else{
             AccountEntity account = accountOptional.get();
             modelMapper.map(accountDTO,account);
