@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,9 +36,11 @@ public class AccountEntity {
     private Date createdDate;
     @Column(name = "is_active")
     private Boolean isActive = true;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private RoleEntity role;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Set<RoleEntity> roles = new HashSet<RoleEntity>();
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account_ref")
     private List<CartEntity> cart;
+
 }

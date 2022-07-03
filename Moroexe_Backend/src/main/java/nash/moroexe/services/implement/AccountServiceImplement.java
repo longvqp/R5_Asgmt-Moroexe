@@ -8,14 +8,18 @@ import nash.moroexe.exceptions.AccountNotFoundException;
 import nash.moroexe.exceptions.ResourceNotFoundException;
 import nash.moroexe.services.AccountServices;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AccountServiceImplement implements AccountServices {
+public class AccountServiceImplement implements AccountServices, UserDetailsService {
 
     private final AccountRepository accountRepository;
     private final ModelMapper modelMapper;
@@ -75,5 +79,13 @@ public class AccountServiceImplement implements AccountServices {
     @Override
     public void deleteAccount(Long id) {
 
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AccountEntity user = accountRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+        return UserDetailsImpl.build(user);
     }
 }
