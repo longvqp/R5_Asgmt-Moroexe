@@ -2,6 +2,8 @@ package nash.moroexe.services.implement;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import nash.moroexe.data.entities.AccountEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,10 +13,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Long accountId;
     private String username;
     private String email;
     @JsonIgnore
@@ -23,7 +27,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(Long id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
+        this.accountId = id;
         this.username = username;
         this.email = email;
         this.password = password;

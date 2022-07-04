@@ -1,6 +1,7 @@
 package nash.moroexe.services;
 
 import nash.moroexe.dto.request.AccountRequestDTO;
+import nash.moroexe.dto.request.SignUpDTO;
 import nash.moroexe.dto.response.AccountResponseDTO;
 
 import java.util.List;
@@ -10,11 +11,9 @@ public interface AccountServices {
 
     AccountResponseDTO findAccountById(Long id);
 
-    AccountResponseDTO createAccount(AccountRequestDTO accountDTO);
-
+    AccountResponseDTO createAccount(SignUpDTO signUpDTO);
     AccountRequestDTO updateAccount(AccountRequestDTO accountDTO, Long id);
-
-    void deleteAccount(Long id);
+    String deleteAccount(Long id);
 
 
 }

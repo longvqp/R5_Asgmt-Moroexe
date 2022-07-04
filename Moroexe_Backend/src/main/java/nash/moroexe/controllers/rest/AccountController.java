@@ -1,19 +1,20 @@
 package nash.moroexe.controllers.rest;
 
-import nash.moroexe.data.entities.AccountEntity;
+
 import nash.moroexe.dto.request.AccountRequestDTO;
 import nash.moroexe.dto.response.AccountResponseDTO;
 import nash.moroexe.services.AccountServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
-    private AccountServices accountServices;
+    private final AccountServices accountServices;
 
     @Autowired
     public AccountController(AccountServices accountServices) {
@@ -27,14 +28,21 @@ public class AccountController {
 
     @GetMapping
     List<AccountResponseDTO> getAllAccount() {
-        return this.accountServices.getAllAccount();
+        return (this.accountServices.getAllAccount());
     }
 
-    @PostMapping
-    AccountResponseDTO createAccount(@RequestBody AccountRequestDTO accountDTO) {
-        return this.accountServices.createAccount(accountDTO);
+    @GetMapping("/{id}")
+    AccountResponseDTO findAccountByID(@PathVariable long id){
+        return  this.accountServices.findAccountById(id);
     }
+
+
+
+
+
+
 
 
 
 }
+

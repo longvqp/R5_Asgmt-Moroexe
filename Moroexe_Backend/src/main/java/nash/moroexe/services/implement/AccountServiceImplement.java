@@ -1,28 +1,32 @@
 package nash.moroexe.services.implement;
 
 import nash.moroexe.data.entities.AccountEntity;
+import nash.moroexe.data.entities.ERole;
+import nash.moroexe.data.entities.RoleEntity;
 import nash.moroexe.data.repositories.AccountRepository;
+import nash.moroexe.data.repositories.RoleRepository;
 import nash.moroexe.dto.request.AccountRequestDTO;
+import nash.moroexe.dto.request.SignUpDTO;
 import nash.moroexe.dto.response.AccountResponseDTO;
-import nash.moroexe.exceptions.AccountNotFoundException;
 import nash.moroexe.exceptions.ResourceNotFoundException;
 import nash.moroexe.services.AccountServices;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AccountServiceImplement implements AccountServices, UserDetailsService {
 
     private final AccountRepository accountRepository;
     private final ModelMapper modelMapper;
+
 
     public AccountServiceImplement(AccountRepository accountRepository, ModelMapper modelMapper) {
         this.accountRepository = accountRepository;
@@ -56,9 +60,12 @@ public class AccountServiceImplement implements AccountServices, UserDetailsServ
         throw new ResourceNotFoundException("Can not found any account with ID= "+id);
     }
 
+
     @Override
-    public AccountResponseDTO createAccount(AccountRequestDTO accountDTO) {
-        AccountEntity account = modelMapper.map(accountDTO, AccountEntity.class);
+    public AccountResponseDTO createAccount(SignUpDTO signUpRequest) {
+
+
+        AccountEntity account = modelMapper.map(signUpRequest, AccountEntity.class);
         AccountEntity savedAccount = accountRepository.save(account);
         return modelMapper.map(savedAccount, AccountResponseDTO.class);
     }
@@ -77,8 +84,8 @@ public class AccountServiceImplement implements AccountServices, UserDetailsServ
     }
 
     @Override
-    public void deleteAccount(Long id) {
-
+    public String deleteAccount(Long id) {
+        return "Deleted";
     }
 
     @Override

@@ -14,12 +14,6 @@ import java.util.Set;
 @Table(name = "roles")
 @NoArgsConstructor
 public class RoleEntity {
-    public enum ERole {
-        ROLE_USER,
-        ROLE_MODERATOR,
-        ROLE_ADMIN
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")

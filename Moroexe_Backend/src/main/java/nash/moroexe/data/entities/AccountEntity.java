@@ -1,6 +1,7 @@
 package nash.moroexe.data.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class AccountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,5 +44,11 @@ public class AccountEntity {
     Set<RoleEntity> roles = new HashSet<RoleEntity>();
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account_ref")
     private List<CartEntity> cart;
+
+    public AccountEntity(String username,String email,String password){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
 }
