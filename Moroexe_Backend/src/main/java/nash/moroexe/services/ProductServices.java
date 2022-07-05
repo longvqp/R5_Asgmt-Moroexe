@@ -6,8 +6,8 @@ import nash.moroexe.dto.response.ProductResponseDTO;
 import java.util.List;
 
 public interface ProductServices {
-    ProductResponseDTO findProductDtoById(Long id);
-
+    ProductResponseDTO findProductById(Long id);
+//Setting Message Respone
     MessageResponse deleteProduct(Long id);
 
     ProductResponseDTO createProduct(ProductResponseDTO productDto);

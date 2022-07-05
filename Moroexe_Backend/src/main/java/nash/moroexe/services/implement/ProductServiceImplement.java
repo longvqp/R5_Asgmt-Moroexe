@@ -23,7 +23,7 @@ public class ProductServiceImplement implements ProductServices {
     }
 
     @Override
-    public ProductResponseDTO findProductDtoById(Long id) {
+    public ProductResponseDTO findProductById(Long id) {
         ProductEntity product = productRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Did not find product with id = " + id)
         );

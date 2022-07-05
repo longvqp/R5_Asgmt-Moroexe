@@ -14,17 +14,18 @@ public class ProductController {
     private ProductServices productService;
 
     @GetMapping("/{id}")
-    public ProductResponseDTO findProductDtoById(@PathVariable Long id) {
-        return productService.findProductDtoById(id);
+    public ProductResponseDTO findProductById(@PathVariable Long id) {
+        return productService.findProductById(id);
     }
 
+    //Testing
     @PostMapping
-    public ProductResponseDTO createProductDto(@Valid @RequestBody ProductResponseDTO productDto) {
+    public ProductResponseDTO createProduct(@Valid @RequestBody ProductResponseDTO productDto) {
         return productService.createProduct(productDto);
     }
 
     @PutMapping
-    public ProductResponseDTO updateProductDto(@Valid @RequestBody ProductResponseDTO productDto) {
+    public ProductResponseDTO updateProduct(@Valid @RequestBody ProductResponseDTO productDto) {
         return productService.updateProduct(productDto);
     }
 
