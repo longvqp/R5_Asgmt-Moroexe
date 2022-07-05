@@ -1,7 +1,8 @@
-package nash.moroexe.controllers.rest;
+package nash.moroexe.controllers.admin;
 
 
 import nash.moroexe.dto.request.AccountRequestDTO;
+import nash.moroexe.dto.request.SignUpDTO;
 import nash.moroexe.dto.response.AccountResponseDTO;
 import nash.moroexe.services.AccountServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,15 @@ public class AccountController {
         return  this.accountServices.findAccountById(id);
     }
 
+    @PostMapping
+    AccountResponseDTO createAccount(SignUpDTO account) {
+        return this.accountServices.createAccount(account);
+    }
 
+    @PutMapping
+    AccountRequestDTO updateAccout(AccountRequestDTO accountDTO, Long id){
+        return this.accountServices.updateAccount(accountDTO,id);
+    }
 
 
 
