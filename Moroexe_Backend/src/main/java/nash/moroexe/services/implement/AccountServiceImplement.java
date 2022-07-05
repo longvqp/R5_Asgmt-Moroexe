@@ -1,21 +1,16 @@
 package nash.moroexe.services.implement;
 
 import nash.moroexe.data.entities.AccountEntity;
-import nash.moroexe.data.entities.ERole;
-import nash.moroexe.data.entities.RoleEntity;
 import nash.moroexe.data.repositories.AccountRepository;
-import nash.moroexe.data.repositories.RoleRepository;
 import nash.moroexe.dto.request.AccountRequestDTO;
 import nash.moroexe.dto.request.SignUpDTO;
 import nash.moroexe.dto.response.AccountResponseDTO;
 import nash.moroexe.exceptions.ResourceNotFoundException;
 import nash.moroexe.services.AccountServices;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -52,19 +47,16 @@ public class AccountServiceImplement implements AccountServices, UserDetailsServ
     @Override
     public AccountResponseDTO findAccountById(Long id) {
         Optional<AccountEntity> accountOptional = this.accountRepository.findById(id);
-        if (accountOptional.isPresent()) {
-            AccountEntity accountEntity = accountOptional.get();
-            AccountResponseDTO dto = new AccountResponseDTO();
-            return modelMapper.map(accountOptional.get(), AccountResponseDTO.class);
+        if (accountOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Can not found any account with ID= "+id);
         }
-        throw new ResourceNotFoundException("Can not found any account with ID= "+id);
+        AccountEntity accountEntity = accountOptional.get();
+        return modelMapper.map(accountEntity, AccountResponseDTO.class);
     }
 
 
     @Override
     public AccountResponseDTO createAccount(SignUpDTO signUpRequest) {
-
-
         AccountEntity account = modelMapper.map(signUpRequest, AccountEntity.class);
         AccountEntity savedAccount = accountRepository.save(account);
         return modelMapper.map(savedAccount, AccountResponseDTO.class);
@@ -73,7 +65,7 @@ public class AccountServiceImplement implements AccountServices, UserDetailsServ
     @Override
     public AccountRequestDTO updateAccount(AccountRequestDTO accountDTO, Long id) {
         Optional<AccountEntity> accountOptional = this.accountRepository.findById(id);
-        if(!accountOptional.isPresent()){
+        if(accountOptional.isEmpty()){
             throw new ResourceNotFoundException("Can not found any account with ID= "+id);
         }else{
             AccountEntity account = accountOptional.get();
@@ -93,6 +85,7 @@ public class AccountServiceImplement implements AccountServices, UserDetailsServ
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AccountEntity user = accountRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+        System.out.println("User on account service: "+ user + "-" + user.getPassword());
         return UserDetailsImpl.build(user);
     }
 }

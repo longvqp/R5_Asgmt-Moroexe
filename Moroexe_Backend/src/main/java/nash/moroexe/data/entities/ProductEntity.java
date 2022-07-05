@@ -23,9 +23,7 @@ public class ProductEntity {
 
     private Date createdDate;
     private Boolean isActive;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product_ref")
-    private List<ProductImage> imageList;
+    private String image;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId")

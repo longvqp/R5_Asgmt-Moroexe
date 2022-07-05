@@ -10,7 +10,6 @@ import nash.moroexe.dto.request.SignInDTO;
 import nash.moroexe.dto.request.SignUpDTO;
 import nash.moroexe.dto.response.AccountResponseDTO;
 import nash.moroexe.dto.response.MessageResponse;
-import nash.moroexe.services.implement.AccountServiceImplement;
 import nash.moroexe.services.implement.UserDetailsImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -37,15 +36,13 @@ import java.util.stream.Collectors;
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final AccountRepository accountRepository;
-    private final AccountServiceImplement accountService;
     private final RoleRepository roleRepository;
     private final JwtUtils jwtUtils;
     private final PasswordEncoder encoder;
 
-    public AuthController(AuthenticationManager authenticationManager, AccountRepository accountRepository, AccountServiceImplement accountService, RoleRepository roleRepository, JwtUtils jwtUtils, PasswordEncoder encoder) {
+    public AuthController(AuthenticationManager authenticationManager, AccountRepository accountRepository, RoleRepository roleRepository, JwtUtils jwtUtils, PasswordEncoder encoder) {
         this.authenticationManager = authenticationManager;
         this.accountRepository = accountRepository;
-        this.accountService = accountService;
         this.roleRepository = roleRepository;
         this.jwtUtils = jwtUtils;
         this.encoder = encoder;
@@ -69,7 +66,6 @@ public class AuthController {
                         userDetails.getEmail(),
                         roles));
     }
-
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpDTO signUpRequest) {
@@ -95,19 +91,17 @@ public class AuthController {
             roles.add(userRole);
         }else {
             strRoles.forEach(role -> {
-                System.out.println("role in swithc case = "+role);
-                switch (role) {
-                    case "admin":
-                        System.out.println("role in case admin = "+role);
-                        RoleEntity adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));;
-                        roles.add(adminRole);
-                        System.out.println("role array in case admin = "+roles);
-                        break;
-                    default:
-                        RoleEntity userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));;
-                        roles.add(userRole);
+                System.out.println("role in switch case = "+role);
+                if ("admin".equals(role)) {
+                    System.out.println("role in case admin = " + role);
+                    RoleEntity adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(adminRole);
+                    System.out.println("role array in case admin = " + roles);
+                } else {
+                    RoleEntity userRole = roleRepository.findByName(ERole.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(userRole);
                 }
             });
         }

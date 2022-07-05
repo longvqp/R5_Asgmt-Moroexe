@@ -38,7 +38,7 @@ public class UserDetailsImpl implements UserDetails {
         List<GrantedAuthority> authorities = account.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
-
+        System.out.println("On USERDETAIL:  " +account.getPassword());
         return new UserDetailsImpl(
                 account.getAccountId(),
                 account.getUsername(),
@@ -64,21 +64,21 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
