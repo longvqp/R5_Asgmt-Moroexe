@@ -1,12 +1,11 @@
 package nash.moroexe.data.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nash.moroexe.data.enums.ERole;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter

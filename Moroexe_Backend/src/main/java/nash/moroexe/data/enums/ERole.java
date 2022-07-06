@@ -1,4 +1,4 @@
-package nash.moroexe.data.entities;
+package nash.moroexe.data.enums;
 
 public enum ERole {
     ROLE_USER,
