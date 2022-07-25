@@ -16,7 +16,6 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private int totalCost;
     private int shippingFee;
     private int productCost;

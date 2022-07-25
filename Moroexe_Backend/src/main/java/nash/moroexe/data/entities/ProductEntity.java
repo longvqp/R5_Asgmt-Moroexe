@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -27,7 +26,7 @@ public class ProductEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId")
-    private CatagoryEntity category_ref;
+    private CategoryEntity category_ref;
 
     @OneToOne(mappedBy = "product")
     private ProductQuantity quantity;

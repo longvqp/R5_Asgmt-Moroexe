@@ -8,12 +8,8 @@ import java.util.List;
 
 public interface AccountServices {
     List<AccountResponseDTO> getAllAccount();
-
     AccountResponseDTO findAccountById(Long id);
-
     AccountResponseDTO createAccount(SignUpDTO signUpDTO);
     AccountRequestDTO updateAccount(AccountRequestDTO accountDTO, Long id);
     String deleteAccount(Long id);
-
-
 }

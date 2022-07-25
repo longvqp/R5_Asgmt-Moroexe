@@ -1,0 +1,11 @@
+.productPannel{
+    height: 100vh;
+    background-color: rgb(120, 120, 85);
+    border-radius: 10px;
+    margin-top: 75px;
+    margin-left: 3px;
+    margin-bottom: 50px;
+    margin-right: 3px;
+    padding: 25px;
+
+}

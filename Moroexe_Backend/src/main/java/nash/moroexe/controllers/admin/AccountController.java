@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/admin/account")
 public class AccountController {
     private final AccountServices accountServices;
 

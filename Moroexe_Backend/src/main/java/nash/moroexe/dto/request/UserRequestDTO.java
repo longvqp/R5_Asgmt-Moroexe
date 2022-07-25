@@ -7,10 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class UserInformationDTO {
-    private Long accountId;
-    private String username;
-    private String email;
+public class UserRequestDTO {
     private String fullname;
     private String phone;
     private Date birthday;

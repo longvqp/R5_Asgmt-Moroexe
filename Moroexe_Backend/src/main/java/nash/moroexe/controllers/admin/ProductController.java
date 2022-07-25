@@ -2,16 +2,18 @@ package nash.moroexe.controllers.admin;
 
 import nash.moroexe.dto.response.ProductResponseDTO;
 import nash.moroexe.services.ProductServices;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/admin/product")
 public class ProductController {
-    @Autowired
-    private ProductServices productService;
+    private final ProductServices productService;
+
+    public ProductController(ProductServices productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/{id}")
     public ProductResponseDTO findProductById(@PathVariable Long id) {

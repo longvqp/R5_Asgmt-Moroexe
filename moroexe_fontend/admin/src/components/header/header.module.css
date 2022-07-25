@@ -1,0 +1,15 @@
+.header {
+  background-color: rgb(255, 255, 255);
+  padding: 25px;
+  border-radius: 10px;
+  height: 10vh;
+}
+.header img {
+  margin-bottom: 35px;
+  margin-top: 25px;
+  margin-left: 25px;
+  width: 20%;
+}
+.header a{
+    width: fit-content;
+}

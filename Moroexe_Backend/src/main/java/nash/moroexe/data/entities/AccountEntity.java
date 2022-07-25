@@ -41,7 +41,7 @@ public class AccountEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    Set<RoleEntity> roles = new HashSet<RoleEntity>();
+    Set<RoleEntity> roles = new HashSet<>();
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account_ref")
     private List<CartEntity> cart;
 
